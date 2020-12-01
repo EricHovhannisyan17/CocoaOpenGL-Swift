@@ -43,9 +43,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         glDisable(GLenum(GL_BLEND))
         glEnable(GLenum(GL_DEPTH_TEST))
         glDepthFunc(GLenum(GL_LEQUAL))
-        glEnable(GLenum(GL_CULL_FACE))
-        glFrontFace(GLenum(GL_CCW))
-        glCullFace(GLenum(GL_BACK))
+//        glEnable(GLenum(GL_CULL_FACE))
+//        glFrontFace(GLenum(GL_CCW))
+//        glCullFace(GLenum(GL_BACK))
 
         scene = Scene()
 

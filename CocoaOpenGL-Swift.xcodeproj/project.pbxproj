@@ -47,6 +47,14 @@
 		0DE685D91E4FD54C0089BF2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DE6859A1E4FD3E10089BF2F /* Main.storyboard */; };
 		0DE685DA1E4FD54C0089BF2F /* shader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 0DE6859C1E4FD3E10089BF2F /* shader.fs */; };
 		0DE685DB1E4FD54C0089BF2F /* shader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 0DE6859D1E4FD3E10089BF2F /* shader.vs */; };
+		FED403412575453E0035AD8D /* vertexShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = FED403402575453E0035AD8D /* vertexShader.vs */; };
+		FED40349257545500035AD8D /* fragmentShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = FED40348257545500035AD8D /* fragmentShader.fs */; };
+		FED4034E257546350035AD8D /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED4034D257546350035AD8D /* Triangle.swift */; };
+		FED4035325758B870035AD8D /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED4035225758B870035AD8D /* Vertex.swift */; };
+		FED4035B257590F00035AD8D /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED4035A257590F00035AD8D /* Quad.swift */; };
+		FED40363257594390035AD8D /* solidQuadVertexShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = FED40362257594390035AD8D /* solidQuadVertexShader.vs */; };
+		FED40368257594570035AD8D /* solidQuadFragmentShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = FED40367257594570035AD8D /* solidQuadFragmentShader.fs */; };
+		FED4036D257598230035AD8D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED4036C257598230035AD8D /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +87,14 @@
 		0DE685AB1E4FD3EF0089BF2F /* shader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.fs; sourceTree = "<group>"; };
 		0DE685AC1E4FD3EF0089BF2F /* shader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.vs; sourceTree = "<group>"; };
 		0DE685B81E4FD4BC0089BF2F /* CocoaOpenGL-Swift-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CocoaOpenGL-Swift-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FED403402575453E0035AD8D /* vertexShader.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexShader.vs; sourceTree = "<group>"; };
+		FED40348257545500035AD8D /* fragmentShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragmentShader.fs; sourceTree = "<group>"; };
+		FED4034D257546350035AD8D /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		FED4035225758B870035AD8D /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		FED4035A257590F00035AD8D /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
+		FED40362257594390035AD8D /* solidQuadVertexShader.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = solidQuadVertexShader.vs; sourceTree = "<group>"; };
+		FED40367257594570035AD8D /* solidQuadFragmentShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = solidQuadFragmentShader.fs; sourceTree = "<group>"; };
+		FED4036C257598230035AD8D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,12 +158,16 @@
 			isa = PBXGroup;
 			children = (
 				0DE685881E4FD3CC0089BF2F /* Cylinder.swift */,
+				FED4034D257546350035AD8D /* Triangle.swift */,
+				FED4035A257590F00035AD8D /* Quad.swift */,
 				0DE685891E4FD3CC0089BF2F /* Matrix4.swift */,
 				0DE6858A1E4FD3CC0089BF2F /* normalmap.png */,
 				0DE6858B1E4FD3CC0089BF2F /* Renderable.swift */,
 				0DE6858C1E4FD3CC0089BF2F /* Scene.swift */,
 				0DE6858D1E4FD3CC0089BF2F /* ShaderProgram.swift */,
 				0DE6858E1E4FD3CC0089BF2F /* Texture.swift */,
+				FED4035225758B870035AD8D /* Vertex.swift */,
+				FED4036C257598230035AD8D /* Color.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -175,10 +195,22 @@
 				0DE685A81E4FD3EF0089BF2F /* Info.plist */,
 				0DE685A91E4FD3EF0089BF2F /* MainMenu.xib */,
 				0DE685AA1E4FD3EF0089BF2F /* MyNSOpenGLView.swift */,
-				0DE685AB1E4FD3EF0089BF2F /* shader.fs */,
-				0DE685AC1E4FD3EF0089BF2F /* shader.vs */,
+				FED4033F2575450D0035AD8D /* Shaders */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		FED4033F2575450D0035AD8D /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				0DE685AB1E4FD3EF0089BF2F /* shader.fs */,
+				0DE685AC1E4FD3EF0089BF2F /* shader.vs */,
+				FED403402575453E0035AD8D /* vertexShader.vs */,
+				FED40348257545500035AD8D /* fragmentShader.fs */,
+				FED40362257594390035AD8D /* solidQuadVertexShader.vs */,
+				FED40367257594570035AD8D /* solidQuadFragmentShader.fs */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,11 +330,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED40368257594570035AD8D /* solidQuadFragmentShader.fs in Resources */,
 				0DE685B01E4FD3EF0089BF2F /* MainMenu.xib in Resources */,
+				FED40349257545500035AD8D /* fragmentShader.fs in Resources */,
+				FED40363257594390035AD8D /* solidQuadVertexShader.vs in Resources */,
 				0DE685AE1E4FD3EF0089BF2F /* Images.xcassets in Resources */,
 				0DE685B31E4FD3EF0089BF2F /* shader.vs in Resources */,
 				0DE685B21E4FD3EF0089BF2F /* shader.fs in Resources */,
 				0DE685911E4FD3CC0089BF2F /* normalmap.png in Resources */,
+				FED403412575453E0035AD8D /* vertexShader.vs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +379,11 @@
 			files = (
 				0DE685931E4FD3CC0089BF2F /* Scene.swift in Sources */,
 				0DE685951E4FD3CC0089BF2F /* Texture.swift in Sources */,
+				FED4035B257590F00035AD8D /* Quad.swift in Sources */,
 				0DE685941E4FD3CC0089BF2F /* ShaderProgram.swift in Sources */,
+				FED4035325758B870035AD8D /* Vertex.swift in Sources */,
+				FED4036D257598230035AD8D /* Color.swift in Sources */,
+				FED4034E257546350035AD8D /* Triangle.swift in Sources */,
 				0DE685AD1E4FD3EF0089BF2F /* AppDelegate.swift in Sources */,
 				0DE685921E4FD3CC0089BF2F /* Renderable.swift in Sources */,
 				0DE6858F1E4FD3CC0089BF2F /* Cylinder.swift in Sources */,

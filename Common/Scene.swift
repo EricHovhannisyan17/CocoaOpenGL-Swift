@@ -34,11 +34,13 @@ let NUM_LIGHTS = 3
 
 class Scene {
     private var program: ShaderProgram
+    private var quadProgram: ShaderProgram
+    
     private var programProjectionMatrixLocation: GLuint
     private var programModelviewMatrixLocation: GLuint
-    private var programCameraPositionLocation: GLuint
-    private var programLightPositionLocation: GLuint
-    private var programLightColorLocation: GLuint
+    private var programCameraPositionLocation: GLuint?
+    private var programLightPositionLocation: GLuint?
+    private var programLightColorLocation: GLuint?
 
     private var lightPosition = [Float](repeating: 0.0, count: NUM_LIGHTS * 3)
     private var lightColor: [Float] = [1.0, 0.0, 0.0,
@@ -48,6 +50,7 @@ class Scene {
 
     private var normalmap: Texture?
     private var renderable: Renderable
+    private var secRenderable: Renderable
 
     private var cameraRotation: Float = 0.0
     private var cameraPosition: [Float] = [0.0, 0.0, 4.0]
@@ -55,19 +58,29 @@ class Scene {
     init() {
         // Create the program, attach shaders, and link.
         program = ShaderProgram()
-        program.attachShader("shader.vs", withType: GL_VERTEX_SHADER)
-        program.attachShader("shader.fs", withType: GL_FRAGMENT_SHADER)
+        program.attachShader("vertexShader.vs", withType: GL_VERTEX_SHADER)
+        program.attachShader("fragmentShader.fs", withType: GL_FRAGMENT_SHADER)
         program.link()
+        
+        quadProgram = ShaderProgram()
+        quadProgram.attachShader("solidQuadVertexShader.vs", withType: GL_VERTEX_SHADER)
+        quadProgram.attachShader("solidQuadFragmentShader.fs", withType: GL_FRAGMENT_SHADER)
+        quadProgram.link()
 
         // Get uniform locations.
         programProjectionMatrixLocation = program.getUniformLocation("projectionMatrix")!
         programModelviewMatrixLocation = program.getUniformLocation("modelviewMatrix")!
-        programCameraPositionLocation = program.getUniformLocation("cameraPosition")!
-        programLightPositionLocation = program.getUniformLocation("lightPosition")!
-        programLightColorLocation = program.getUniformLocation("lightColor")!
+        
+        programProjectionMatrixLocation = quadProgram.getUniformLocation("projectionMatrix")!
+        programModelviewMatrixLocation = quadProgram.getUniformLocation("modelviewMatrix")!
+//        programCameraPositionLocation = program.getUniformLocation("cameraPosition")!
+//        programLightPositionLocation = program.getUniformLocation("lightPosition")!
+//        programLightColorLocation = program.getUniformLocation("lightColor")!
 
-        normalmap = Texture.loadFromFile("normalmap.png")
-        renderable = Cylinder(program: program, numberOfDivisions: 36)
+//        normalmap = Texture.loadFromFile("normalmap.png")
+//        renderable = Cylinder(program: program, numberOfDivisions: 36)
+        renderable = Triangle(program: program)
+        secRenderable = Quad(program: quadProgram)
     }
 
     func render(_ projectionMatrix: Matrix4) {
@@ -79,12 +92,14 @@ class Scene {
         program.use()
         glUniformMatrix4fv(GLint(programProjectionMatrixLocation), 1, GLboolean(GL_FALSE), projectionMatrix.matrix)
         glUniformMatrix4fv(GLint(programModelviewMatrixLocation), 1, GLboolean(GL_FALSE), modelviewMatrix.matrix)
-        glUniform3fv(GLint(programCameraPositionLocation), 1, cameraPosition)
-        glUniform3fv(GLint(programLightPositionLocation), GLint(NUM_LIGHTS), lightPosition)
-        glUniform3fv(GLint(programLightColorLocation), GLint(NUM_LIGHTS), lightColor)
-
+        
         // Render the object.
         renderable.render()
+                
+        quadProgram.use()
+        glUniformMatrix4fv(GLint(programProjectionMatrixLocation), 1, GLboolean(GL_FALSE), projectionMatrix.matrix)
+        glUniformMatrix4fv(GLint(programModelviewMatrixLocation), 1, GLboolean(GL_FALSE), modelviewMatrix.matrix)
+        secRenderable.render()
 
         // Disable the program.
         glUseProgram(0)
